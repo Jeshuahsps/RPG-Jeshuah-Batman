@@ -1,1 +1,2 @@
-<script language="javascript" type="text/javascript" src="webhelper.js"></script>
+What we need is to have the "Fight Him" option run the round(); function and build a runAway() function as well as a robinMelee() option, to give the player advice on how to melee/what he would do in this situation. (Can have robin say "I don't know Batman, its your call") sometimes).
+

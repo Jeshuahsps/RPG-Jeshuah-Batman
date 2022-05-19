@@ -56,6 +56,15 @@ function checkAnswers(answer) {
     case "Michael Keaton":
       toMelee();
       break;
+    case "Fight Him":
+      round();
+      break;
+    case "Run Away":
+      runAway();
+      break;
+    case "Ask Robin":
+      robinMelee();
+      break;
     }
 }
 

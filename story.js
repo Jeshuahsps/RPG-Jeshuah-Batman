@@ -209,3 +209,11 @@ function toMelee(){
   choices = ["Fight Him","Run Away","Ask Robin"];
   answer = setOptions(choices);
 }
+
+function runAway(){
+  alert("You ran away from the Joker and the Joker went clinically insane.")
+}
+
+function robinMelee(){
+  alert("Robin: Hey Batman, I would fight him. We don't want him to do evil to Gotham City!")
+}

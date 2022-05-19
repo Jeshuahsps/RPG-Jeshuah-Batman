@@ -1,5 +1,3 @@
-/* Uses Case Statements */
-
 // variables
 // var name = "";
 var scene1 = roller;
@@ -211,7 +209,9 @@ function toMelee(){
 }
 
 function runAway(){
-  alert("You ran away from the Joker and the Joker went clinically insane.")
+  story("You ran away from the Joker and the Joker went clinically insane.");
+  choices = ["Hunt him Down","Leave him be","Ask Robin"];
+  answer = setOptions(choices);
 }
 
 function robinMelee(){

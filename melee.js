@@ -1,9 +1,14 @@
 /* Global Variables */
+
+
+//Attributes
 var attributes = [["Strength",0],["Intelligence",0],["Wisdom",0],["Constitution",0],["Dexterity",0],["Charisma",0]];
 var classReq = [[0,13,0],[1,14,1],[2,9,2],[3,11,3],[4,10,4],[5,12,5]];
 var classes = [["Christian Bale",["Batman Begins", "The Dark Night"],"One Punch Knockout"],["Robert Pattinson",["The Batman 2020"],"Knows All The Answers"],["Michael Keaton",["Batman 1989"],"Predicts Villain Behaviors"],["Will Arnett",["Lego Batman: The Movie"],"No Fall Damage"],["Ben Affleck",["Batman vs. Superman"],"Can Escape Any Room"],["Kevin Conroy",["Batman: The Killing Joke"],"Soul Catching Voice"]];
+
 /* Bonus only applies on move or attack, not move+attack */
 var moves=["move","move+attack","attack","special"];
+
 /* Attribute, Threshold, Bonus, Move Applied */
 var classBonus = [[0,14,+2,2],[4,12,+2,0]];
 var npcs = [["Joker",20,"punch",6,2]];

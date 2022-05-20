@@ -54,11 +54,11 @@ function checkAnswers(answer) {
     case "Michael Keaton":
       toMelee();
       break;
-    case "Fight Him":
+    case "Confront Him":
       round();
       break;
-    case "Run Away":
-      runAway();
+    case "Wait and then Attack":
+      wait();
       break;
     case "Ask Robin":
       robinMelee();
@@ -203,17 +203,17 @@ function restart(){
 
 function toMelee(){
   document.location = 'melee.html';
-  story("You are face to face with the Joker.");
-  choices = ["Fight Him","Run Away","Ask Robin"];
+  story("You are on the top of Gotham Funland and you see the Joker planning something.");
+  choices = ["Confront Him","Wait and then Attack","Ask Robin"];
   answer = setOptions(choices);
 }
 
-function runAway(){
-  story("You ran away from the Joker and the Joker went clinically insane.");
+function wait(){
+  story("You sat on the rafters with Robin undetected and listened to the Joker's plan.");
   choices = ["Hunt him Down","Leave him be","Ask Robin"];
   answer = setOptions(choices);
 }
 
-function robinMelee(){
-  alert("Robin: Hey Batman, I would fight him. We don't want him to do evil to Gotham City!")
+function robinJoker(){
+  alert("Robin: Hey Batman, I would wait and see what the Joker is up to, then we can fight him.")
 }

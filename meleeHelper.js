@@ -11,7 +11,6 @@ var hasImage = false;
 
 function start() {
   setup();
-  scene1();
 }
 
 function addImage(imageURL){
@@ -28,8 +27,8 @@ function addImage(imageURL){
 }
 
 function setup() {
-  story("Game Loading");
-  options=["test 1", "test 2", "test3"];
+  story("You have run into the Joker,");
+  options=["Fight Him", "Run Away", "Ask Robin"];
   setOptions(options); 
   buttonElement.innerHTML = "What will you do?"; 
   buttonElement.setAttribute("onclick", "checkAnswers(dropdown.value)");

@@ -204,13 +204,13 @@ function restart(){
 function toMelee(){
   document.location = 'melee.html';
   story("You are on the top of Gotham Funland and you see the Joker planning something.");
-  choices = ["Confront Him","Wait and then Attack","Ask Robin"];
+  choices = ["Confront Him","Wait then Attack","Ask Robin"];
   answer = setOptions(choices);
 }
 
 function wait(){
   story("You sat on the rafters with Robin undetected and listened to the Joker's plan.");
-  choices = ["Hunt him Down","Leave him be","Ask Robin"];
+  choices = ["Chase Him","Leave him","Ask Robin"];
   answer = setOptions(choices);
 }
 

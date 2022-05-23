@@ -8,3 +8,7 @@ What we need is to have the "Fight Him" option run the round(); function and bui
 		fix webhelper.js?
 	}
 }
+
+5/23/22 CONDITIONAL{
+	Conditional that states if it is the players turn, then go to the option, if it is the NPC's turn, then display the new story after a few seconds, OR use a "Ok" button to advance dialogue, otherwise, a new event will happen to determine initiative
+}

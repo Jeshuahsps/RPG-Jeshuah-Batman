@@ -7,7 +7,7 @@ var classReq = [[0,13,0],[1,14,1],[2,9,2],[3,11,3],[4,10,4],[5,12,5]];
 var classes = [["Christian Bale",["Batman Begins", "The Dark Night"],"One Punch Knockout"],["Robert Pattinson",["The Batman 2020"],"Knows All The Answers"],["Michael Keaton",["Batman 1989"],"Predicts Villain Behaviors"],["Will Arnett",["Lego Batman: The Movie"],"No Fall Damage"],["Ben Affleck",["Batman vs. Superman"],"Can Escape Any Room"],["Kevin Conroy",["Batman: The Killing Joke"],"Soul Catching Voice"]];
 
 /* Bonus only applies on move or attack, not move+attack */
-var moves=["move","move+attack","attack","special"];
+var moves=["Move","Move + Attack","Attack","Special"];
 
 /* Attribute, Threshold, Bonus, Move Applied */
 var classBonus = [[0,14,+2,2],[4,12,+2,0]];
@@ -25,21 +25,26 @@ function roller(dice,numDice){
 
 function round(){
   let roll = roller(6,1);
-  alert("Rolled "+roll);
+  story("You rolled a "+roll);
   let turn = "player";
   switch(true){
     case (roll < 4):
       turn = 0;
+      playerInit();
       break;
     case (roll > 3 && roll < 6):
       turn = 1;
+      npcInit();
+      //playerTurn();
       break;
     default:
       turn = 2;
+      critical();
+      //nim();
       break;  
-  }
-  alert("Initiative goes to: "+initiative[turn]); 
-  alert(npcs[0][0] + " attacks with a " + npcs[0][2] + " and does "+ roller(npcs[0][3],1) + " damage");
+  } 
+  //Go to Notes for description
+  //alert(npcs[0][0] + " attacks with a " + npcs[0][2] + " and does "+ roller(npcs[0][3],1) + " damage");
 }
 
 
@@ -60,4 +65,34 @@ function userCalculation(){
   else{
     punches = punches + 4;
   }
+}
+
+function playerInit(){
+  story("You got the Initiative, what would you like to do");
+  choices = moves;
+  answer = setOptions(choices);
+}
+
+function npcInit(){
+  story(npcs[0][0] + " attacks with a " + npcs[0][2] + " and does "+ roller(npcs[0][3],1) + " damage");
+  choices = ["Ouch"];
+  answer = setOptions(choices)
+}
+
+function critical(){
+  story("You and "+npcs[0][0]+" clash as if both of you expected an attack, You have to play a game of nim to settle this.");
+  choices = ["Lets Settle This"];
+  answer = setOptions(choices);
+}
+
+function playerTurn(){
+  story("It is your turn, what would you like to do?");
+  choices = moves;
+  answer = setOptions(choices);
+}
+
+function nim(){
+  story("You won Nim");
+  choices = ["Great"];
+  answer = setOptions(choices);
 }

@@ -25,20 +25,23 @@ function roller(dice,numDice){
 
 function round(){
   let roll = roller(6,1);
-  story("You rolled a "+roll);
+  console.log("You rolled a "+roll);
   let turn = "player";
   switch(true){
     case (roll < 4):
       turn = 0;
+      console.log = ("Player Turn");
       playerInit();
       break;
     case (roll > 3 && roll < 6):
       turn = 1;
+      console.log("NPC Initiative");
       npcInit();
       //playerTurn();
       break;
     default:
       turn = 2;
+      console.log("Critical");
       critical();
       //nim();
       break;  

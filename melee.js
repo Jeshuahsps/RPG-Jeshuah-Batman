@@ -25,11 +25,14 @@ function roller(dice,numDice){
 
 function round(){
   let roll = roller(6,1);
-  alert("Rolled "+roll);
+  alert("You rolled a "+roll);
   let turn = "player";
   switch(true){
     case (roll < 4):
       turn = 0;
+      story("You got the Initiative, what would you like to do");
+      chocies = ["Move","Move + Attack","Attack","Run Away"];
+      answer = setOptions(choices);
       break;
     case (roll > 3 && roll < 6):
       turn = 1;
@@ -37,8 +40,8 @@ function round(){
     default:
       turn = 2;
       break;  
-  }
-  alert("Initiative goes to: "+initiative[turn]); 
+  } 
+  //Go to Notes for description
   alert(npcs[0][0] + " attacks with a " + npcs[0][2] + " and does "+ roller(npcs[0][3],1) + " damage");
 }
 

@@ -61,7 +61,7 @@ function checkAnswers(answer) {
       wait();
       break;
     case "Ask Robin":
-      robinMelee();
+      robinJoker();
       break;
     }
 }

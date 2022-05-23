@@ -27,8 +27,8 @@ function addImage(imageURL){
 }
 
 function setup() {
-  story("You have run into the Joker,");
-  options=["Fight Him", "Run Away", "Ask Robin"];
+  story("You are on the top of Gotham Funland and you see the Joker planning something.");
+  options=["Confront Him", "Wait and then Attack", "Ask Robin"];
   setOptions(options); 
   buttonElement.innerHTML = "What will you do?"; 
   buttonElement.setAttribute("onclick", "checkAnswers(dropdown.value)");

@@ -1,5 +1,5 @@
 /* Global Variables */
-
+var modalText = "Houston, we have a problem defining modalText";
 
 //Attributes
 var attributes = [["Strength",0],["Intelligence",0],["Wisdom",0],["Constitution",0],["Dexterity",0],["Charisma",0]];
@@ -25,24 +25,27 @@ function roller(dice,numDice){
 
 function round(){
   let roll = roller(6,1);
-  console.log("You rolled a "+roll);
+  modalText=("You rolled a "+roll+".<br>");
   let turn = "player";
   switch(true){
     case (roll < 4):
       turn = 0;
-      console.log = ("Player Turn");
+      modalText+="You have the initiative!";
+      showModal(modalText);
       playerInit();
       break;
     case (roll > 3 && roll < 6):
       turn = 1;
-      console.log("NPC Initiative");
+      modalText+="Your opponent has the initiative!";
+      showModal(modalText);
       npcInit();
       //playerTurn();
       break;
     default:
       turn = 2;
-      console.log("Critical");
+      modalText+="Whoa! Critical incident.";
       critical();
+      showModal(modalText);
       //nim();
       break;  
   } 

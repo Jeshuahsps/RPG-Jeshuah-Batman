@@ -62,3 +62,16 @@ function delayText(text, delay) {
     callback(text);
   }, delay);
 }
+
+
+function showModal(htmlData){
+  let statsBox = document.getElementById("modalBox");
+  let statsText = document.getElementById("modal-content");
+  statsText.innerHTML = htmlData;
+  statsBox.style.display = "block";
+}
+
+function hideModal() {
+  let statsBox = document.getElementById("modalBox");
+  statsBox.style.display = "none";
+}

@@ -63,6 +63,9 @@ function checkAnswers(answer) {
     case "Ask Robin":
       robinJoker();
       break;
+    case "Ouch":
+      playerInit();
+      break;
     }
 }
 
@@ -187,8 +190,6 @@ function classOptions(){
   return classList;
 }
 
-
-
 function hideModal() {
   let statsBox = document.getElementById("modalBox");
   statsBox.removeChild(statsBox.lastChild);
@@ -204,13 +205,13 @@ function restart(){
 function toMelee(){
   document.location = 'melee.html';
   story("You are on the top of Gotham Funland and you see the Joker planning something.");
-  choices = ["Confront Him","Wait then Attack","Ask Robin"];
+  choices = ["Confront Him","~Wait then Attack","~Ask Robin"];
   answer = setOptions(choices);
 }
 
 function wait(){
   story("You sat on the rafters with Robin undetected and listened to the Joker's plan.");
-  choices = ["Chase Him","Leave him","Ask Robin"];
+  choices = ["~Chase Him","~Leave him","~Ask Robin"];
   answer = setOptions(choices);
 }
 

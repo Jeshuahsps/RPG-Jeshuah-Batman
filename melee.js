@@ -85,18 +85,21 @@ function npcInit(){
   answer = setOptions(choices)
 }
 
-function critical(){
-  story("You and "+npcs[0][0]+" clash as if both of you expected an attack, You have to play a game of nim to settle this.");
-  choices = ["Lets Settle This"];
-  answer = setOptions(choices);
-}
-
+/* Not Implemented */
 function playerTurn(){
   story("It is your turn, what would you like to do?");
   choices = moves;
   answer = setOptions(choices);
 }
 
+/* Not Implemented */
+function critical(){
+  story("You and "+npcs[0][0]+" clash as if both of you expected an attack, You have to play a game of nim to settle this.");
+  choices = ["Lets Settle This. (Note: not implemented - reload page.)"];
+  answer = setOptions(choices);
+}
+
+/* Not Implemented */
 function nim(){
   story("You won Nim");
   choices = ["Great"];

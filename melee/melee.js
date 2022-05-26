@@ -249,6 +249,7 @@ function enemyAttack(att){
 }
 
 function pcHeal(){
+  inventory[0][3][2] = inventory[0][3][2] - 1;
   let heal = customRoll(3,0)+inventory[0][3][1];
   story("You use a First-Aid kit and recover "+heal+" health.");
   hp[0] = hp[0] + heal;

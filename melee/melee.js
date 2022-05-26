@@ -216,6 +216,9 @@ function attackId(answer){
   if (answer.includes("Batarang") && inventory[0][2][2] > 0){
     pcAttack(2);
   }
+  if (answer.includes("First-Aid") && inventory[0][3][2] > 0){
+    pcHeal();
+  }
 }
 
 function enemyAttack(att){
@@ -243,4 +246,13 @@ function enemyAttack(att){
     story(storyText);
     choices = ["Ok"];
     setOptions(choices);
+}
+
+function pcHeal(){
+  let heal = customRoll(3,0)+inventory[0][3][1];
+  story("You use a First-Aid kit and recover "+heal+" health.");
+  hp[0] = hp[0] + heal;
+  if (hp[0] > 30) hp[0] = 30;
+  choices = ["Ok"];
+  setOptions(choices);
 }

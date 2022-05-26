@@ -28,7 +28,7 @@ function addImage(imageURL){
 
 function setup() {
   story("You are on the top of Gotham Funland and you see the Joker planning something.");
-  options=["Confront Him", "Wait and then Attack", "Ask Robin"];
+  options=["Confront Him", "~Wait and then Attack", "~Ask Robin"];
   setOptions(options); 
   buttonElement.innerHTML = "What will you do?"; 
   buttonElement.setAttribute("onclick", "checkAnswers(dropdown.value)");
@@ -61,4 +61,17 @@ function delayText(text, delay) {
   var timer = setInterval(function () {
     callback(text);
   }, delay);
+}
+
+
+function showModal(htmlData){
+  let statsBox = document.getElementById("modalBox");
+  let statsText = document.getElementById("modal-content");
+  statsText.innerHTML = htmlData;
+  statsBox.style.display = "block";
+}
+
+function hideModal() {
+  let statsBox = document.getElementById("modalBox");
+  statsBox.style.display = "none";
 }

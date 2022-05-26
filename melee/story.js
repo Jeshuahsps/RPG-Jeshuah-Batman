@@ -1,8 +1,7 @@
 // variables
 // var name = "";
 var choices = [];
-var inventory = [[["Batarang",3],["First-Aid Kit",5],["Smoke Pellets",2],["Impact Mines",3],["Sticky Glue Balls",2]],["Gold",50]]; //Stub array for now, but I made it so that it would take the gadget from the "attack" choices to show "Batarang: (inventory[0][1] Remaining)"
-var hp = [25,20];
+var inventory = [[["Punch",5,null,"You punch "],["Punch",5,null,"You punch "],["Batarang",7,3],["First-Aid Kit",3,5],["Smoke Pellets",null,2],["Impact Mines",7,3],["Sticky Glue Balls",null,2]],["Gold",null,50]]; //Stub array for now, but I made it so that it would take the gadget from the "attack" choices to show "Batarang: (inventory[0][1] Remaining)"
 
 function checkAnswers(answer) {
   switch(answer) {
@@ -112,7 +111,8 @@ function checkAnswers(answer) {
       move();
       break;
     case "Move + Attack":
-      moveAttack();
+      //moveAttack();
+      pcAttack(1);
       break;
     case "Attack":
       attack();

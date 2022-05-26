@@ -14,6 +14,8 @@ var classBonus = [[0,14,+2,2],[4,12,+2,0]];
 var npcs = [["Joker",20,"punch",6,2]];
 var initiative = ["player","opponent","critical"];
 var turn = 0;
+var stats = [[4,15],[3,13]];
+var hp = [30,25];
 
 function roller(dice,numDice){
   let sum = 0;
@@ -186,4 +188,39 @@ function setup() {
   setOptions(options); 
   buttonElement.innerHTML = "What will you do?"; 
   buttonElement.setAttribute("onclick", "checkAnswers(dropdown.value)");
+}
+
+function pcAttack(att){
+  if (inventory[0][att][2] > 0 || inventory[0][att][2] == null){
+    if (inventory[0][att][2] != null){
+      inventory[0][att][2] = inventory[0][att][2] - 1;
+    }
+    let damage = 0;
+    let storyText = inventory[0][att][3]+"Joker";
+    let attRoll = customRoll(20,1);
+    alert(attRoll);
+    if (attRoll > 16){
+      damage = customRoll(4,1)+customRoll(4,1)+inventory[0][att][1];
+      storyText+= ". Critical hit! You deal "+damage+" damage.";
+    }
+    else if (attRoll < 5){
+      storyText+=". You slip up and miss.";
+    }
+    else if (attRoll + stats[0][0] >= stats[1][1]){
+      damage = customRoll(4,1)+inventory[0][att][1];
+      storyText+=", dealing "+damage+" damage.";
+    }
+    else{
+      storyText+= ". Joker seems unphased.";
+    }
+    storyText+=" You then move out of the way.";
+    hp[1] = hp[1]-damage;
+    story(storyText);
+    choices = ["Ok"];
+    setOptions(choices);
+  }
+}
+
+function customRoll(range,min){
+  return Math.floor(Math.random()*range+min);
 }

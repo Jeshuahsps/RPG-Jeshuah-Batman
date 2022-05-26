@@ -198,7 +198,6 @@ function pcAttack(att){
     let damage = 0;
     let storyText = inventory[0][att][3]+"Joker";
     let attRoll = customRoll(20,1);
-    alert(attRoll);
     if (attRoll > 16){
       damage = customRoll(4,1)+customRoll(4,1)+inventory[0][att][1];
       storyText+= ". Critical hit! You deal "+damage+" damage.";
@@ -213,7 +212,9 @@ function pcAttack(att){
     else{
       storyText+= ". Joker seems unphased.";
     }
-    storyText+=" You then move out of the way.";
+    if (att == 1){
+      storyText+=" You then move out of the way.";
+    } 
     hp[1] = hp[1]-damage;
     story(storyText);
     choices = ["Ok"];

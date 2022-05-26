@@ -55,7 +55,7 @@ function checkAnswers(answer) {
       toMelee();
       break;
     case "Confront Him":
-      round();
+      determineInitiative();
       break;
     case "Wait and then Attack":
       wait();

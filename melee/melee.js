@@ -99,7 +99,7 @@ function moveAttack(){//Find in 5/24[2]
 
 function attack(){//Find in 5/24[3]
   story("What would you like to attack with?");
-  choices = ["Batarang: ("+inventory[0][0][1]+" Remaining)","Smoke Pellets: ("+inventory[0][2][1]+" Remaining)","Impact Mines: ("+inventory[0][3][1]+" Remaining)","Sticky Glue Balls: ("+inventory[0][4][1]+" Remaining)","First-Aid Kit: ("+inventory[0][1][1]+" Remaining)"];
+  choices = ["Batarang: ("+inventory[0][2][2]+" Remaining)","Smoke Pellets: ("+inventory[0][4][2]+" Remaining)","Impact Mines: ("+inventory[0][5][2]+" Remaining)","Sticky Glue Balls: ("+inventory[0][6][2]+" Remaining)","First-Aid Kit: ("+inventory[0][3][2]+" Remaining)"];
   answer = setOptions(choices);
 }
 
@@ -223,4 +223,10 @@ function pcAttack(att){
 
 function customRoll(range,min){
   return Math.floor(Math.random()*range+min);
+}
+
+function attackId(answer){
+  if (answer.includes("Batarang") && inventory[0][2][2] > 0){
+    pcAttack(2);
+  }
 }

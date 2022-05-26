@@ -1,6 +1,9 @@
 /* Global Variables */
 var modalText = "Houston, we have a problem defining modalText";
-
+var choices = [];
+var inventory = [[["Batarang",3],["First-Aid Kit",5],["Smoke Pellets",2],["Impact Mines",3],["Sticky Glue Balls",2]],["Gold",50]]; //Stub array for now, but I made it so that it would take the gadget from the "attack" choices to show "Batarang: (inventory[0][1] Remaining)"
+var turn = 0;
+var hp = [25,20];
 //Attributes
 var attributes = [["Strength",0],["Intelligence",0],["Wisdom",0],["Constitution",0],["Dexterity",0],["Charisma",0]];
 var classReq = [[0,13,0],[1,14,1],[2,9,2],[3,11,3],[4,10,4],[5,12,5]];
@@ -17,6 +20,48 @@ var turn = 0;
 var stats = [[4,15],[3,13]];
 var hp = [30,25];
 
+
+function enemyTurn(){
+  let attackType = Math.floor(Math.random()*20+1);
+  let damage = 0;
+  if (attackType < 7) {
+    damage = Math.floor(Math.random()*3+3);
+    story(npcs[0][0]+" punched. You take "+damage+" damage.");
+  }
+  else if (attackType > 6 && attackType < 11) {
+    damage = Math.floor(Math.random()*4+4);
+    story(npcs[0][0]+" shot his gun. You take "+damage+" damage.");
+  }
+  else if (attackType > 9 && attackType < 15) {
+    damage = Math.floor(Math.random()*2+6);
+    story(npcs[0][0]+" used his tazer. You take "+damage+" damage.");
+  }
+  else if (attackType > 14 && attackType < 18) {
+    story(npcs[0][0]+" threw laughing gas. You take put on a gas mask and take no effect.");
+  }
+  else {
+    story(npcs[0][0]+" tried to run. You chase him down, and the fight continues.");
+  }
+  hp[0]= hp[0]-damage;
+  choices = ["Ok"];
+  setOptions(choices);
+}
+
+function turnChange(){
+  turn++;
+  if (hp[1]<1) {
+    victory();
+  }
+  else if(hp[0]<1){
+    defeat();
+  }
+  else {
+    if (turn % 2 == 0) pcTurn();
+    else enemyTurn();
+  }
+}
+
+
 function roller(dice,numDice){
   let sum = 0;
   for (let roll = 1; roll <= numDice; roll ++){
@@ -26,6 +71,7 @@ function roller(dice,numDice){
   return sum;
 }
 
+/* This function determines initiative at the start of melee */
 function determineInitiative(){
   let roll = roller(6,1);
   modalText=("You rolled a "+roll+".<br>");
@@ -75,6 +121,9 @@ function userCalculation(){
     punches = punches + 4;
   }
 }
+
+function ifPlayerInit(){
+  story("You got the Initiative, what would you like to do");
 
 
 function pcTurn(){

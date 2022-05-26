@@ -15,9 +15,6 @@ function checkAnswers(answer) {
     case "Ask Robin":
       robinJoker();
       break;
-    case "Ouch":
-      playerTurn();
-      break;
     }
 }
 
@@ -136,8 +133,8 @@ function checkAnswers(answer) {
     case "Ok":
       turnChange();
       break;
-    case "Ouch":
-      turnChange();
+    case "Punch":
+      pcAttack(0);
       break;
     default:
       attackId(answer);

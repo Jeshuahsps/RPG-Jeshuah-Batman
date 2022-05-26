@@ -99,7 +99,7 @@ function moveAttack(){//Find in 5/24[2]
 
 function attack(){//Find in 5/24[3]
   story("What would you like to attack with?");
-  choices = ["Batarang: ("+inventory[0][2][2]+" Remaining)","Smoke Pellets: ("+inventory[0][4][2]+" Remaining)","Impact Mines: ("+inventory[0][5][2]+" Remaining)","Sticky Glue Balls: ("+inventory[0][6][2]+" Remaining)","First-Aid Kit: ("+inventory[0][3][2]+" Remaining)"];
+  choices = ["Punch","Batarang: ("+inventory[0][2][2]+" Remaining)","Smoke Pellets: ("+inventory[0][4][2]+" Remaining)","Impact Mines: ("+inventory[0][5][2]+" Remaining)","Sticky Glue Balls: ("+inventory[0][6][2]+" Remaining)","First-Aid Kit: ("+inventory[0][3][2]+" Remaining)"];
   answer = setOptions(choices);
 }
 

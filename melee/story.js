@@ -1,25 +1,14 @@
 // variables
 // var name = "";
-var scene1 = roller;
-var whichAttribute = 0; // Which one are we on?
-var roll = -1;
-var attribute = "Undefined";
-/* Global Variables */
-// attributes = attribute, current value
-var attributes = [["Strength",0],["Intelligence",0],["Wisdom",0],["Constitution",0],["Dexterity",0],["Charisma",0]];
-// classReq = attributes[index], minimum value to qualify, classes[index]
-var classReq = [[0,11,0],[1,11,1],[2,11,2],[3,11,3],[4,11,4],[5,11,5]];
-var classes = [["Christian Bale",["Batman Begins, The Dark Night"],"One Punch Knockout"],[]];
-var classReq = [[0,13,0],[1,14,1],[2,9,2],[3,11,3],[4,10,4],[5,12,5]];
-var classes = [["Christian Bale",["Batman Begins", "The Dark Night"],"One Punch Knockout"],["Robert Pattinson",["The Batman 2020"],"Knows All The Answers"],["Michael Keaton",["Batman 1989"],"Predicts Villain Behaviors"],["Will Arnett",["Lego Batman: The Movie"],"No Fall Damage"],["Ben Affleck",["Batman vs. Superman"],"Can Escape Any Room"],["Kevin Conroy",["Batman: The Killing Joke"],"Soul Catching Voice"]];
 var choices = [];
-var maxRolls = 3; // how many rerolls? Default = 3
-var rollCount = 0; // which reroll are we on?
+var inventory = [[["Batarang",3],["First-Aid Kit",5],["Smoke Pellets",2],["Impact Mines",3],["Sticky Glue Balls",2]],["Gold",50]]; //Stub array for now, but I made it so that it would take the gadget from the "attack" choices to show "Batarang: (inventory[0][1] Remaining)"
+var turn = 0;
+var hp = [25,20];
 
 function checkAnswers(answer) {
   switch(answer) {
     case "Confront Him":
-      round();
+      determineInitiative();
       break;
     case "Wait and then Attack":
       wait();
@@ -28,7 +17,7 @@ function checkAnswers(answer) {
       robinJoker();
       break;
     case "Ouch":
-      playerInit();
+      playerTurn();
       break;
     }
 }
@@ -81,32 +70,9 @@ function robinJoker(){
 }
 
 
-// variables
-// var name = "";
-var scene1 = roller;
-var whichAttribute = 0; // Which one are we on?
-var roll = -1;
-var attribute = "Undefined";
-/* Global Variables */
-// attributes = attribute, current value
-var attributes = [["Strength",0],["Intelligence",0],["Wisdom",0],["Constitution",0],["Dexterity",0],["Charisma",0]];
-// classReq = attributes[index], minimum value to qualify, classes[index]
-var classReq = [[0,11,0],[1,11,1],[2,11,2],[3,11,3],[4,11,4],[5,11,5]];
-var classes = [["Christian Bale",["Batman Begins, The Dark Night"],"One Punch Knockout"],[]];
-var classReq = [[0,13,0],[1,14,1],[2,9,2],[3,11,3],[4,10,4],[5,12,5]];
-var classes = [["Christian Bale",["Batman Begins", "The Dark Night"],"One Punch Knockout"],["Robert Pattinson",["The Batman 2020"],"Knows All The Answers"],["Michael Keaton",["Batman 1989"],"Predicts Villain Behaviors"],["Will Arnett",["Lego Batman: The Movie"],"No Fall Damage"],["Ben Affleck",["Batman vs. Superman"],"Can Escape Any Room"],["Kevin Conroy",["Batman: The Killing Joke"],"Soul Catching Voice"]];
-var choices = [];
-var maxRolls = 3; // how many rerolls? Default = 3
-var rollCount = 0; // which reroll are we on?
-var inventory = [[["Batarang",3],["First-Aid Kit",5],["Smoke Pellets",2],["Impact Mines",3],["Sticky Glue Balls",2]],["Gold",50]]; //Stub array for now, but I made it so that it would take the gadget from the "attack" choices to show "Batarang: (inventory[0][1] Remaining)"
-var turn = 0;
-var hp = [25,20];
-
+/* Canonical checkAnswer */
 function checkAnswers(answer) {
   switch(answer) {
-    case "Keep":
-      keep();
-      break;
     case "Reroll":
       reroll();
       break;
@@ -141,7 +107,7 @@ function checkAnswers(answer) {
       toMelee();
       break;
     case "Confront Him":
-      round();
+      determineInitiative();
       break;
     case "Move":
       move();
@@ -265,17 +231,6 @@ function stats(){
   statsBox.appendChild(close);
   statsBox.style.display = "block";
   picker();
-}
-
-function picker(){
-  let addStory="Go pick your class! Here's what to know about your options:<br><ul style=\"text-align:left;\">";
-  choices = classOptions();
-  for (let choice=0; choice < choices.length; choice++){
-    addStory+="<li>If you choose "+choices[choice]+ " you .... FILL IN HERE</li>";
-  }
-  addStory+="<ul";
-  story(addStory);
-  answer = setOptions(choices);
 }
 
 /* Function Class Options

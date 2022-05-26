@@ -123,29 +123,15 @@ function enemyTurn(){
   if (turn < 1){
     turn = 1;
   }
-  let attackType = Math.floor(Math.random()*20+1);
-  let damage = 0;
-  if (attackType < 7){
-    damage = Math.floor(Math.random()*3+3);
-    story(npcs[0][0]+" punched. You take "+damage+" damage.");
+  let attackType = Math.floor(Math.random()*10+1);
+  if (attackType < 6){
+    enemyAttack(0);
   }
-  else if (attackType > 6 && attackType < 11) {
-    damage = Math.floor(Math.random()*4+4);
-    story(npcs[0][0]+" shot his gun. You take "+damage+" damage.");
+  else if (attackType > 5 && attackType < 9){
+    if (jokerInv[1][2] > 0) enemyAttack(1);
+    else(enemyTurn());
   }
-  else if (attackType > 9 && attackType < 15) {
-    damage = Math.floor(Math.random()*2+6);
-    story(npcs[0][0]+" used his tazer. You take "+damage+" damage.");
-  }
-  else if (attackType > 14 && attackType < 18) {
-    story(npcs[0][0]+" threw laughing gas. You take put on a gas mask and take no effect.");
-  }
-  else {
-    story(npcs[0][0]+" tried to run. You chase him down, and the fight continues.");
-  }
-  hp[0]= hp[0]-damage;
-  choices = ["Ok"];
-  setOptions(choices);
+  else enemyAttack(2);
 }
 
 function turnChange(){
@@ -230,4 +216,31 @@ function attackId(answer){
   if (answer.includes("Batarang") && inventory[0][2][2] > 0){
     pcAttack(2);
   }
+}
+
+function enemyAttack(att){
+  if (jokerInv[att][2] != null){
+      jokerInv[att][2] = jokerInv[att][2] - 1;
+    }
+    let damage = 0;
+    let storyText = jokerInv[att][3];
+    let attRoll = customRoll(20,1);
+    if (attRoll > 18){
+      damage = customRoll(4,1)+customRoll(4,1)+jokerInv[att][1];
+      storyText+= ". Critical hit! You take "+damage+" damage.";
+    }
+    else if (attRoll < 5){
+      storyText+=". He misses, destracted from laughing about something.";
+    }
+    else if (attRoll + stats[1][0] >= stats[0][1]){
+      damage = customRoll(4,1)+jokerInv[att][1];
+      storyText+=", dealing "+damage+" damage.";
+    }
+    else{
+      storyText+= jokerInv[att][4];
+    }
+    hp[0] = hp[0]-damage;
+    story(storyText);
+    choices = ["Ok"];
+    setOptions(choices);
 }

@@ -340,7 +340,7 @@ function heal(){
 function enemyTurn(){
   let attackType = Math.floor(Math.random()*20+1);
   let damage = 0;
-  if (attackType < 7) {
+  if (attackType < 7){
     damage = Math.floor(Math.random()*3+3);
     story(npcs[0][0]+" punched. You take "+damage+" damage.");
   }
@@ -372,8 +372,12 @@ function turnChange(){
     defeat();
   }
   else {
-    if (turn % 2 == 0) pcTurn();
-    else enemyTurn();
+    if (turn % 2 == 0){
+      pcTurn();
+    } 
+    else{
+      enemyTurn();
+    }
   }
 }
 

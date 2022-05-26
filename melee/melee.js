@@ -23,7 +23,7 @@ function roller(dice,numDice){
   return sum;
 }
 
-function round(){
+function determineInitiative(){
   let roll = roller(6,1);
   modalText=("You rolled a "+roll+".<br>");
   let turn = "player";
@@ -82,7 +82,7 @@ function playerInit(){
 function npcInit(){
   story(npcs[0][0] + " attacks with a " + npcs[0][2] + " and does "+ roller(npcs[0][3],1) + " damage");
   choices = ["Ouch"];
-  answer = setOptions(choices)
+  answer = setOptions(choices);
 }
 
 /* Not Implemented */

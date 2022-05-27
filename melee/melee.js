@@ -13,7 +13,9 @@ var classBonus = [[0,14,+2,2],[4,12,+2,0]];
 var npcs = [["Joker",20,"punch",6,2]];
 var initiative = ["player","opponent","critical"];
 var turn = 0;
+/* stats[0] = attack bonus; stats[1] = armour class */
 var stats = [[4,15],[3,13]];
+/* hp[0] is batman; hp[1] = joker */
 var hp = [30,25];
 
 function roller(dice,numDice){

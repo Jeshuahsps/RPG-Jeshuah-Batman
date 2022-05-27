@@ -6,7 +6,7 @@ var classReq = [[0,13,0],[1,14,1],[2,9,2],[3,11,3],[4,10,4],[5,12,5]];
 var classes = [["Christian Bale",["Batman Begins", "The Dark Night"],"One Punch Knockout"],["Robert Pattinson",["The Batman 2020"],"Knows All The Answers"],["Michael Keaton",["Batman 1989"],"Predicts Villain Behaviors"],["Will Arnett",["Lego Batman: The Movie"],"No Fall Damage"],["Ben Affleck",["Batman vs. Superman"],"Can Escape Any Room"],["Kevin Conroy",["Batman: The Killing Joke"],"Soul Catching Voice"]];
 
 /* Bonus only applies on move or attack, not move+attack */
-var moves=["Move","Move + Attack","Attack","Special"];
+var moves=["~Move","Move + Attack","Attack","~Special"];
 
 /* Attribute, Threshold, Bonus, Move Applied */
 var classBonus = [[0,14,+2,2],[4,12,+2,0]];
@@ -101,7 +101,7 @@ function moveAttack(){//Find in 5/24[2]
 
 function attack(){//Find in 5/24[3]
   story("What would you like to attack with?");
-  choices = ["Punch","Batarang: ("+inventory[0][2][2]+" Remaining)","Smoke Pellets: ("+inventory[0][4][2]+" Remaining)","Impact Mines: ("+inventory[0][5][2]+" Remaining)","Sticky Glue Balls: ("+inventory[0][6][2]+" Remaining)","First-Aid Kit: ("+inventory[0][3][2]+" Remaining)"];
+  choices = ["Punch","Batarang: ("+inventory[0][2][2]+" Remaining)","~Smoke Pellets: ("+inventory[0][4][2]+" Remaining)","~Impact Mines: ("+inventory[0][5][2]+" Remaining)","~Sticky Glue Balls: ("+inventory[0][6][2]+" Remaining)","First-Aid Kit: ("+inventory[0][3][2]+" Remaining)"];
   answer = setOptions(choices);
 }
 
@@ -127,13 +127,13 @@ function enemyTurn(){
   }
   let attackType = Math.floor(Math.random()*10+1);
   if (attackType < 6){
-    enemyAttack(0);
+    damageCalc(1,0);
   }
   else if (attackType > 5 && attackType < 9){
-    if (jokerInv[1][2] > 0) enemyAttack(1);
+    if (jokerInv[1][2] > 0) damageCalc(1,1);
     else(enemyTurn());
   }
-  else enemyAttack(2);
+  else damageCalc(1,2);
 }
 
 function turnChange(){
@@ -178,76 +178,17 @@ function setup() {
   buttonElement.setAttribute("onclick", "checkAnswers(dropdown.value)");
 }
 
-function pcAttack(att){
-  if (inventory[0][att][2] > 0 || inventory[0][att][2] == null){
-    if (inventory[0][att][2] != null){
-      inventory[0][att][2] = inventory[0][att][2] - 1;
-    }
-    let damage = 0;
-    let storyText = inventory[0][att][3]+"Joker";
-    let attRoll = customRoll(20,1);
-    if (attRoll > 16){
-      damage = customRoll(4,1)+customRoll(4,1)+inventory[0][att][1];
-      storyText+= ". Critical hit! You deal "+damage+" damage.";
-    }
-    else if (attRoll < 5){
-      storyText+=". You slip up and miss.";
-    }
-    else if (attRoll + stats[0][0] >= stats[1][1]){
-      damage = customRoll(4,1)+inventory[0][att][1];
-      storyText+=", dealing "+damage+" damage.";
-    }
-    else{
-      storyText+= ". Joker seems unphased.";
-    }
-    if (att == 1){
-      storyText+=" You then move out of the way.";
-    } 
-    hp[1] = hp[1]-damage;
-    story(storyText);
-    choices = ["Ok"];
-    setOptions(choices);
-  }
-}
-
 function customRoll(range,min){
   return Math.floor(Math.random()*range+min);
 }
 
 function attackId(answer){
   if (answer.includes("Batarang") && inventory[0][2][2] > 0){
-    pcAttack(2);
+    damageCalc(0,2);
   }
   if (answer.includes("First-Aid") && inventory[0][3][2] > 0){
     pcHeal();
   }
-}
-
-function enemyAttack(att){
-  if (jokerInv[att][2] != null){
-      jokerInv[att][2] = jokerInv[att][2] - 1;
-    }
-    let damage = 0;
-    let storyText = jokerInv[att][3];
-    let attRoll = customRoll(20,1);
-    if (attRoll > 18){
-      damage = customRoll(4,1)+customRoll(4,1)+jokerInv[att][1];
-      storyText+= ". Critical hit! You take "+damage+" damage.";
-    }
-    else if (attRoll < 5){
-      storyText+=". He misses, destracted from laughing about something.";
-    }
-    else if (attRoll + stats[1][0] >= stats[0][1]){
-      damage = customRoll(4,1)+jokerInv[att][1];
-      storyText+=", dealing "+damage+" damage.";
-    }
-    else{
-      storyText+= jokerInv[att][4];
-    }
-    hp[0] = hp[0]-damage;
-    story(storyText);
-    choices = ["Ok"];
-    setOptions(choices);
 }
 
 function pcHeal(){
@@ -258,4 +199,64 @@ function pcHeal(){
   if (hp[0] > 30) hp[0] = 30;
   choices = ["Ok"];
   setOptions(choices);
+}
+
+function damageCalc(cha,att){
+	if (cha == 0){
+		if (inventory[0][att][2] > 0 || inventory[0][att][2] == null){
+		    if (inventory[0][att][2] != null){
+		      inventory[0][att][2] = inventory[0][att][2] - 1;
+		    }
+		    let damage = 0;
+		    let storyText = inventory[0][att][3]+"Joker";
+		    let attRoll = customRoll(20,1);
+		    if (attRoll > 16){
+		      damage = customRoll(4,1)+customRoll(4,1)+inventory[0][att][1];
+		      storyText+= ". Critical hit! You deal "+damage+" damage.";
+		    }
+		    else if (attRoll < 5){
+		      storyText+=". You slip up and miss.";
+		    }
+		    else if (attRoll + stats[0][0] >= stats[1][1]){
+		      damage = customRoll(4,1)+inventory[0][att][1];
+		      storyText+=", dealing "+damage+" damage.";
+		    }
+		    else{
+		      storyText+= ". Joker seems unphased.";
+		    }
+		    if (att == 1){
+		      storyText+=" You then move out of the way.";
+		    } 
+		    hp[1] = hp[1]-damage;
+		    story(storyText);
+		    choices = ["Ok"];
+		    setOptions(choices);
+		  }
+	}
+	else{
+		if (jokerInv[att][2] != null){
+	      jokerInv[att][2] = jokerInv[att][2] - 1;
+	    }
+	    let damage = 0;
+	    let storyText = jokerInv[att][3];
+	    let attRoll = customRoll(20,1);
+	    if (attRoll > 18){
+	      damage = customRoll(4,1)+customRoll(4,1)+jokerInv[att][1];
+	      storyText+= ". Critical hit! You take "+damage+" damage.";
+	    }
+	    else if (attRoll < 5){
+	      storyText+=". He misses, destracted from laughing about something.";
+	    }
+	    else if (attRoll + stats[1][0] >= stats[0][1]){
+	      damage = customRoll(4,1)+jokerInv[att][1];
+	      storyText+=", dealing "+damage+" damage.";
+	    }
+	    else{
+	      storyText+= jokerInv[att][4];
+	    }
+	    hp[0] = hp[0]-damage;
+	    story(storyText);
+	    choices = ["Ok"];
+	    setOptions(choices);
+		}
 }

@@ -108,7 +108,7 @@ function checkAnswers(answer) {
       break;
     case "Move + Attack":
       //moveAttack();
-      pcAttack(1);
+      damageCalc(0,1);
       break;
     case "Attack":
       attack();
@@ -132,7 +132,7 @@ function checkAnswers(answer) {
       turnChange();
       break;
     case "Punch":
-      pcAttack(0);
+      damageCalc(0,0);
       break;
     default:
       attackId(answer);
